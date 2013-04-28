@@ -23,11 +23,8 @@ function dotty-status() {
 }
 
 function dotty-remote() {
-	if [[ ! -d ~/.dotty ]]; then
-		dotty-git clone git@github.com:$1.git
-	else
-		dotty-git remote add origin git@github.com:$1.git
-		dotty-git branch --set-upstream master origin/master
+	if [[ -z "$(dotty-git remote show -n origin | grep :$1.git)" ]]; then
+		dotty-git remote add -t master origin git@github.com:$1.git
 	fi
 }
 
