@@ -26,7 +26,7 @@ function dotty-remote() {
 	if [[ -z "$(dotty-git remote show -n origin | grep /$1.git)" ]]; then
 		dotty-git remote add -t master origin git://github.com/$1.git
 		dotty-git remote set-url --push origin git@github.com:$1.git
-		dotty-git sync
+		dotty-sync
 	fi
 }
 
@@ -35,6 +35,7 @@ function dotty-sync() {
 	dotty-git rebase
 	dotty-git commit -am 'Updating tracked files'
 	dotty-git push
+	dotty-git reset --hard HEAD
 }
 
 function dotty-diff() {
