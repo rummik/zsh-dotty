@@ -32,10 +32,9 @@ function dotty-remote() {
 }
 
 function dotty-sync() {
-	dotty-git fetch
-	dotty-git rebase
+	dotty-git pull --rebase origin/master
 	dotty-git commit -am 'Updating tracked files'
-	dotty-git push
+	dotty-git push origin/master
 }
 
 function dotty-diff() {
