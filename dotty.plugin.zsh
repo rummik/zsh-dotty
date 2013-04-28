@@ -27,6 +27,7 @@ function dotty-remote() {
 		dotty-git remote add -t master origin git://github.com/$1.git
 		dotty-git remote set-url --push origin git@github.com:$1.git
 		dotty-sync
+		dotty-git reset origin/master --hard
 	fi
 }
 
@@ -35,7 +36,6 @@ function dotty-sync() {
 	dotty-git rebase
 	dotty-git commit -am 'Updating tracked files'
 	dotty-git push
-	dotty-git reset --hard HEAD
 }
 
 function dotty-diff() {
