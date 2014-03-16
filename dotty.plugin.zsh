@@ -66,3 +66,21 @@ function dotty {
 		print "Unnown command: $cmd"
 	fi
 }
+
+# completion
+function _dotty {
+	emulate -L zsh
+
+	local curcontext="$curcontext" context state state_descr line
+	local -A opt_args
+
+	_arguments \
+		'1: :->command' \
+		'*: :->argument' \
+		--
+
+	[[ $state = command ]] &&
+		compadd -- ${="$(whence -mw 'dotty-*')"//(dotty-|: (function|alias|command))}
+}
+
+compdef _dotty dotty
